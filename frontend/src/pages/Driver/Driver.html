@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Management - Car Rental Management System</title>
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="./Driver.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="d-flex">
+    <div id="sidebar">
+      <h3 class="p-3 text-center">Car Rental</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active" href="./Driver.html">Drivers</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Vehicle/Vehicle.html">Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Price/Price.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="../StaffManagement/StaffManagement.html">Staff Management</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inspection/Inspection.html">Inspections</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="p-4">
+      <header class="d-flex justify-content-between align-items-center">
+        <h1>Driver Management</h1>
+        <button id="addDriverBtn" class="btn btn-primary">Add Driver</button>
+      </header>
+      <hr>
+
+      <!-- Driver Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>License Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="driverTableBody">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div class="modal" id="driverModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">Add Driver</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="driverForm">
+            <div class="mb-3">
+              <label for="driverName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="driverName" required>
+            </div>
+            <div class="mb-3">
+              <label for="driverPhone" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="driverPhone" required>
+            </div>
+            <div class="mb-3">
+              <label for="driverLicense" class="form-label">License Number</label>
+              <input type="text" class="form-control" id="driverLicense" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./Driver.ts"></script>
+</body>
+</html>

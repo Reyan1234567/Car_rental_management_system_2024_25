@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehicle Management</title>
+  <link rel="stylesheet" href="../../styles/index.css" />
+  <link rel="stylesheet" href="./Vehicle.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Vehicle Management</h1>
+    <button id="addVehicleBtn" class="btn btn-primary">Add Vehicle</button>
+    <table class="table table-striped" id="vehicleTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Model</th>
+          <th>Brand</th>
+          <th>Plate Number</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="vehicleTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Add/Edit Vehicle Modal -->
+  <div id="vehicleModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Vehicle</h2>
+      <form id="vehicleForm">
+        <input type="hidden" id="vehicleId" />
+        <div class="form-group">
+          <label for="vehicleModel">Model</label>
+          <input type="text" id="vehicleModel" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="vehicleBrand">Brand</label>
+          <input type="text" id="vehicleBrand" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="vehiclePlate">Plate Number</label>
+          <input type="text" id="vehiclePlate" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="vehicleStatus">Status</label>
+          <select id="vehicleStatus" class="form-control">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" id="closeModal">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./Vehicle.ts" type="module"></script>
+</body>
+</html>
+

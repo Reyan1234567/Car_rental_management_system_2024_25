@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Car Rental Management System</title>
+  <link rel="stylesheet" href="../../styles/index.css">
+  <link rel="stylesheet" href="./Dashboard.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="d-flex">
+    <div id="sidebar">
+      <h3 class="p-3 text-center">Car Rental</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Driver/Driver.html">Drivers</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Vehicle/Vehicle.html">Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Price/Price.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="../StaffManagement/StaffManagement.html">Staff Management</a></li>
+        <li class="nav-item"><a class="nav-link" href="../Inspection/Inspection.html">Inspections</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="p-4">
+      <header class="d-flex justify-content-between align-items-center">
+        <h1>Dashboard</h1>
+        <button id="logoutBtn" class="btn btn-danger">Logout</button>
+      </header>
+      <hr>
+      <div class="row">
+        <!-- Summary Cards -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Drivers</h5>
+              <p id="totalDrivers" class="card-text">Loading...</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Vehicles</h5>
+              <p id="totalVehicles" class="card-text">Loading...</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Inspections</h5>
+              <p id="totalInspections" class="card-text">Loading...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./Dashboard.ts"></script>
+</body>
+</html>

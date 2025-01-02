@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../styles/index.css" />
+  <link rel="stylesheet" href="./Price.css" />
+  <title>Price Management</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Manage Vehicle Prices</h1>
+    <button id="add-price-btn" class="btn btn-primary">Add Price</button>
+    <table id="price-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Vehicle</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="price-table-body"></tbody>
+    </table>
+    <div id="price-modal" class="modal">
+      <!-- Modal content will be injected here by TypeScript -->
+    </div>
+  </div>
+</body>
+<script src="./Price.ts" type="module"></script>
+</html>

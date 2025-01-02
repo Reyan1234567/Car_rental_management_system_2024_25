@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../styles/index.css" />
+  <link rel="stylesheet" href="./Inspection.css" />
+  <title>Inspection</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Vehicle Inspections</h1>
+    <button id="add-inspection-btn" class="btn btn-primary">Add Inspection</button>
+    <table id="inspection-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Vehicle</th>
+          <th>Inspector</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inspection-table-body"></tbody>
+    </table>
+    <div id="inspection-modal" class="modal">
+      <!-- Modal content will be injected here by TypeScript -->
+    </div>
+  </div>
+</body>
+<script src="./Inspection.ts" type="module"></script>
+</html>
