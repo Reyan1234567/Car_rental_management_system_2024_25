@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="/frontend/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!--Bootstrap 5 icons CDN-->
+    <link rel="stylesheet" href="/frontend/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link
+    href="/frontend/src/assets/fonts/fontawesome-free-6.7.2-web/css/all.min.css"
+    rel="stylesheet"
+  >
+    <title>Booking</title>
+    <link rel="stylesheet" href="/frontend/src/pages/Dashboard/Dashboard.css">
+    <link rel="stylesheet" href="/frontend/src/components/Aside/aside.css">
+    <link rel="stylesheet" href="/frontend/src/components/Navbar/nav.css">
+    <link rel="stylesheet" href="/frontend/src/pages/Booking/Booking.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="dashboard-body">
+        <aside id="aside-section" class="aside-section">
+          <!-- Logo at the Top -->
+          <div class="logo">
+            <img src="/frontend/src/assets/images/Polo.png" alt="Logo" class="img-fluid" />
+          </div>
+      
+          <!-- Navigation Menu -->
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a href="/frontend/src/pages/Dashboard/Dashboard.html" class="nav-link active">
+                <i class="fa fa-home"></i>
+                <span class="link-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/Booking/Booking.html" class="nav-link">
+                <i class="fa fa-calendar-alt"></i>
+                <span class="link-text">Booking</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/StaffManagement/StaffManagement.html" class="nav-link">
+                <i class="fa fa-user-circle"></i>
+                <span class="link-text">Staff Management</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/Vehicle/Vehicle.html" class="nav-link">
+                <i class="fa fa-car"></i>
+                <span class="link-text">Vehicle</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/Driver/Driver.html" class="nav-link">
+                <i class="fas fa-user"></i>
+                <span class="link-text">Driver</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/Inspection/Inspection.html" class="nav-link">
+                <i class="fa fa-wrench"></i>
+                <span class="link-text">Inspection</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/frontend/src/pages/price/price.html" class="nav-link">
+                <i class="fa fa-dollar-sign"></i>
+                <span class="link-text">Price</span>
+              </a>
+            </li>
+           
+          </ul>
+        </aside>
+      
+        <div class="footer">
+        <main class="main-section">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <!-- Dashboard Header -->
+        <h1 class="dashboard-header">Dashboard / <small>Inspection</small></h1>
+      
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-img-container">
+            <img src="/frontend/src/assets/Images/profile.png" alt="Profile" class="profile-img" id="profile-img">
+          </div>
+          <span class="username">User Name</span>
+          <div class="dropdown-menu">
+            <a href="/frontend/src/pages/profile/profile.html" id="profile-link">
+              <i class="fa fa-user-circle me-1"></i> Profile
+            </a>
+            <a href="/frontend/src/pages/Login/login.html" id="logout-link">
+              <i class="fa fa-sign-out-alt me-1"></i> Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+      
+    
+  <div class="dashboard-content">
+    <section class="p-3">
+
+      <div class="row">
+          <div class="col-12">
+              <button class="btn btn-primary newUser" data-bs-toggle="modal" data-bs-target="#userForm">New User <i class="bi bi-people"></i></button>
+          </div>
+      </div>
+  
+      <div class="row">
+          <div class="col-12">
+              <table class="table table-striped table-hover mt-3 text-center table-bordered">
+  
+                  <thead>
+                      <tr>
+                          <th>S.No</th>
+                          <th>Picture</th>
+                          <th>Name</th>
+                          <th>City</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>License No</th>
+                          <th>Start Date</th>
+                          <th>Expire Date</th> <!-- Expiry Date Column -->
+                          <th>Action</th> <!-- Action Column -->
+                      </tr>
+                  </thead>
+  
+                  <tbody id="data"></tbody>
+  
+              </table>
+          </div>
+      </div>
+  
+  </section>
+  
+  
+  <!--Modal Form-->
+  <div class="modal fade" id="userForm">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+  
+              <div class="modal-header">
+                  <h4 class="modal-title">Fill the Form</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+  
+              <div class="modal-body">
+  
+                  <form action="#" id="myForm">
+  
+                      <div class="card imgholder">
+                          <label for="imgInput" class="upload">
+                              <input type="file" name="" id="imgInput">
+                              <i class="bi bi-plus-circle-dotted"></i>
+                          </label>
+                          <img src="./image/Profile Icon.webp" alt="" width="200" height="200" class="img">
+                      </div>
+  
+                      <div class="inputField">
+                          <div>
+                              <label for="name">Name:</label>
+                              <input type="text" name="" id="name" required>
+                          </div>
+                          
+                          <div>
+                              <label for="city">City:</label>
+                              <input type="text" name="" id="city" required>
+                          </div>
+                          <div>
+                              <label for="email">E-mail:</label>
+                              <input type="email" name="" id="email" required>
+                          </div>
+                          <div>
+                              <label for="phone"> Phone Number:</label>
+                              <input type="text" name="" id="phone" minlength="10" maxlength="13" required>
+                          </div>
+                          <div>
+                              <label for="post">License Number:</label>
+                              <input type="text" name="" id="post" required>
+                          </div>
+                          <div>
+                              <label for="sDate">Start Date:</label>
+                              <input type="date" name="" id="sDate" required>
+                          </div>
+                          <div>
+                              <label for="eDate">Expire Date:</label> <!-- Added input for expire date -->
+                              <input type="date" name="" id="eDate" required>
+                          </div>
+                      </div>
+  
+                  </form>
+              </div>
+  
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!--Read Data Modal-->
+  <div class="modal fade" id="readData">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+  
+              <div class="modal-header">
+                  <h4 class="modal-title">Profile</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+  
+              <div class="modal-body">
+  
+                  <form action="#" id="myForm">
+  
+                      <div class="card imgholder">
+                          <img src="./image/Profile Icon.webp" alt="" width="200" height="200" class="showImg">
+                      </div>
+  
+                      <div class="inputField">
+                          <div>
+                              <label for="name">Name:</label>
+                              <input type="text" name="" id="showName" disabled>
+                          </div>
+                          
+                          <div>
+                              <label for="city">City:</label>
+                              <input type="text" name="" id="showCity" disabled>
+                          </div>
+                          <div>
+                              <label for="email">E-mail:</label>
+                              <input type="email" name="" id="showEmail" disabled>
+                          </div>
+                          <div>
+                              <label for="phone">Phone Number:</label>
+                              <input type="text" name="" id="showPhone" minlength="10" maxlength="13" disabled>
+                          </div>
+                          <div>
+                              <label for="post">License Number:</label>
+                              <input type="text" name="" id="showPost" disabled>
+                          </div>
+                          <div>
+                              <label for="sDate">Start Date:</label>
+                              <input type="date" name="" id="showsDate" disabled>
+                          </div>
+                          <div>
+                              <label for="eDate">Expire Date:</label> <!-- Added read-only field for expire date -->
+                              <input type="date" name="" id="showExpireDate" disabled>
+                          </div>
+                      </div>
+  
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  </div>
+</main>
+  
+<footer>
+  © 2025 Polo Car Rental Management System. All rights reserved.
+</footer>
+</div>
+</div>
+</div>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="/frontend/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="/frontend/src/pages/Booking/Booking.js"></script>
+  </body>
+</html>
