@@ -1,0 +1,83 @@
+/* General Form Styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+ 
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 300px;
+}
+
+label {
+  font-size: 14px;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+input::after {
+  border: 1px solid rgb(56, 3, 3);
+}
+
+input[type="file"] {
+  padding: 4px;
+}
+
+.user {
+  color: #8392a5; /* Change this color as needed */
+  opacity: 1; /* Ensure full visibility */
+}
+
+.btn-save{
+  display: block;
+  width: 100px;
+  min-height: 30px;
+  padding: 5px;
+  margin: 20px 0; /* Keep the button's alignment as it was */
+  background-color: rgb(97, 8, 8); /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Font size for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.save-btn:hover {
+  background-color: rgb(155, 48, 48); /* Button background color on hover */
+}
+
+.save-button {
+  flex: 1 100%;
+}
+
+/* Media Query for Larger Screens */
+@media (min-width: 768px) {
+  form {
+    flex-direction: row; /* Align fields in a row */
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    flex: 1; /* Equal width for each field */
+    min-width: 45%; /* Allow two fields to fit side by side */
+  }
+
+  .save-button {
+    flex: 1 100%; /* Save button remains on its own line */
+  }
+}
