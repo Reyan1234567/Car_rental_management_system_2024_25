@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard | Car Rental Management System</title>
+  <title>Profile | Car Rental Management System</title>
 
-
+  <!-- External CSS -->
   
   <link rel="stylesheet" href="/frontend/src/pages/Dashboard/dashboard.css">
   <link rel="stylesheet" href="/frontend/src/components/Navbar/nav.css">
   <link rel="stylesheet" href="/frontend/src/components/Aside/aside.css">
+  <link rel="stylesheet" href="/frontend/src/pages/profile/profile.css">
   <link
     href="/frontend/src/assets/fonts/fontawesome-free-6.7.2-web/css/all.min.css"
     rel="stylesheet"
@@ -19,23 +20,17 @@
   <div id="root">
   <div class="dashboard-body">
     <aside id="aside-section" class="aside-section">
-     
+      <!-- Logo at the Top -->
       <div class="logo">
         <img src="/frontend/src/assets/images/Polo.png" alt="Logo" class="img-fluid" />
       </div>
-  
-  
+    
+      <!-- Navigation Menu -->
       <ul class="nav flex-column">
         <li class="nav-item">
           <a href="/frontend/src/pages/Dashboard/Dashboard.html" class="nav-link active">
             <i class="fa fa-home"></i>
             <span class="link-text">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="/frontend/src/pages/Booking/Booking.html" class="nav-link">
-            <i class="fa fa-calendar-alt"></i>
-            <span class="link-text">Booking</span>
           </a>
         </li>
         <li class="nav-item">
@@ -68,17 +63,22 @@
             <span class="link-text">Price</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Booking/Booking.html" class="nav-link">
+            <i class="fa fa-calendar-alt"></i>
+            <span class="link-text">Booking</span>
+          </a>
+        </li>
       </ul>
     </aside>
-  
     <div class="footer">
     <main class="main-section">
-
+  <!-- Navbar -->
   <nav class="navbar">
-   
-    <h1 class="dashboard-header">Dashboard</h1>
+    <!-- Dashboard Header -->
+    <h1 class="dashboard-header">Dashboard / <small>Profile</small></h1>
   
-
+    <!-- Profile Section -->
     <div class="profile-section">
       <div class="profile-img-container">
         <img src="/frontend/src/assets/Images/profile.png" alt="Profile" class="profile-img" id="profile-img">
@@ -94,47 +94,55 @@
       </div>
     </div>
   </nav>
-    <div class="dashboard-content">
-      <section class="stats-section">
-        <div class="stat-box">
-          <h3>Total Drivers</h3>
-          <p class="stat-value">0</p>
-        </div>
-        <div class="stat-box">
-          <h3>Total Bookings</h3>
-          <p class="stat-value">0</p>
-        </div>
-        <div class="stat-box">
-          <h3>Total Income</h3>
-          <p class="stat-value">$0</p>
-        </div>
-        <div class="stat-box">
-          <h3>Total Expenses</h3>
-          <p class="stat-value">$0</p>
-        </div>
-      </section>
   
-      <section class="chart-section">
-        <h3>Income vs Expenses</h3>
-        <div class="chart-placeholder">
-          Chart Placeholder
+  <!-- Dashboard Body -->
+ 
+  
+    <div class="dashboard-content">
+      <form action="#" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="Owner"
+            class="input-field"
+            required
+          />
         </div>
-      </section>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value="owner@gmail.com"
+            class="input-field"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="profile">Profile</label>
+          <input type="file" id="profile" name="profile" class="input-field" accept=".png, .jpg, .jpeg" />
+        </div>
+        <div class="save-button">
+          <button type="submit" class="btn-save">Save</button>
+        </div>
+      </form>
     </div>
-  </main>
 
+  </main>
+  
 <footer>
   © 2025 Polo Car Rental Management System. All rights reserved.
 </footer>
 </div>
 </div>
 </div>
-
+<!-- TypeScript File -->
 <script src="/frontend/src/components/Navbar/nav.ts" type="module"></script>
 <script src="/frontend/src/pages/Dashboard/dashboard.ts" type="module"></script>
 <script src="/frontend/src/components/Aside/aside.ts" type="module"></script>
 </body>
 </html>
-
-    
-
