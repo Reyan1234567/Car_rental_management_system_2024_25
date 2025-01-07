@@ -3,61 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Car Rental Management System</title>
-  <link rel="stylesheet" href="../../styles/index.css">
-  <link rel="stylesheet" href="./Dashboard.css">
+  <title>Dashboard | Car Rental Management System</title>
+
+
+  
+  <link rel="stylesheet" href="/frontend/src/pages/Dashboard/dashboard.css">
+  <link rel="stylesheet" href="/frontend/src/components/Navbar/nav.css">
+  <link rel="stylesheet" href="/frontend/src/components/Aside/aside.css">
+  <link
+    href="/frontend/src/assets/fonts/fontawesome-free-6.7.2-web/css/all.min.css"
+    rel="stylesheet"
+  >
 </head>
 <body>
-  <!-- Sidebar -->
-  <div class="d-flex">
-    <div id="sidebar">
-      <h3 class="p-3 text-center">Car Rental</h3>
+  <div id="root">
+  <div class="dashboard-body">
+    <aside id="aside-section" class="aside-section">
+     
+      <div class="logo">
+        <img src="/frontend/src/assets/images/Polo.png" alt="Logo" class="img-fluid" />
+      </div>
+  
+  
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="../Driver/Driver.html">Drivers</a></li>
-        <li class="nav-item"><a class="nav-link" href="../Vehicle/Vehicle.html">Vehicles</a></li>
-        <li class="nav-item"><a class="nav-link" href="../Price/Price.html">Pricing</a></li>
-        <li class="nav-item"><a class="nav-link" href="../StaffManagement/StaffManagement.html">Staff Management</a></li>
-        <li class="nav-item"><a class="nav-link" href="../Inspection/Inspection.html">Inspections</a></li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Dashboard/Dashboard.html" class="nav-link active">
+            <i class="fa fa-home"></i>
+            <span class="link-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Booking/Booking.html" class="nav-link">
+            <i class="fa fa-calendar-alt"></i>
+            <span class="link-text">Booking</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/StaffManagement/StaffManagement.html" class="nav-link">
+            <i class="fa fa-user-circle"></i>
+            <span class="link-text">Staff Management</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Vehicle/Vehicle.html" class="nav-link">
+            <i class="fa fa-car"></i>
+            <span class="link-text">Vehicle</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Driver/Driver.html" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span class="link-text">Driver</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/Inspection/Inspection.html" class="nav-link">
+            <i class="fa fa-wrench"></i>
+            <span class="link-text">Inspection</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/frontend/src/pages/price/price.html" class="nav-link">
+            <i class="fa fa-dollar-sign"></i>
+            <span class="link-text">Price</span>
+          </a>
+        </li>
       </ul>
-    </div>
+    </aside>
+  
+    <div class="footer">
+    <main class="main-section">
 
-    <!-- Main Content -->
-    <div id="main-content" class="p-4">
-      <header class="d-flex justify-content-between align-items-center">
-        <h1>Dashboard</h1>
-        <button id="logoutBtn" class="btn btn-danger">Logout</button>
-      </header>
-      <hr>
-      <div class="row">
-        <!-- Summary Cards -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Total Drivers</h5>
-              <p id="totalDrivers" class="card-text">Loading...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Total Vehicles</h5>
-              <p id="totalVehicles" class="card-text">Loading...</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Total Inspections</h5>
-              <p id="totalInspections" class="card-text">Loading...</p>
-            </div>
-          </div>
-        </div>
+  <nav class="navbar">
+   
+    <h1 class="dashboard-header">Dashboard</h1>
+  
+
+    <div class="profile-section">
+      <div class="profile-img-container">
+        <img src="/frontend/src/assets/Images/profile.png" alt="Profile" class="profile-img" id="profile-img">
+      </div>
+      <span class="username">User Name</span>
+      <div class="dropdown-menu">
+        <a href="/frontend/src/pages/profile/profile.html" id="profile-link">
+          <i class="fa fa-user-circle me-1"></i> Profile
+        </a>
+        <a href="/frontend/src/pages/Login/login.html" id="logout-link">
+          <i class="fa fa-sign-out-alt me-1"></i> Logout
+        </a>
       </div>
     </div>
-  </div>
-  <script type="module" src="./Dashboard.ts"></script>
+  </nav>
+    <div class="dashboard-content">
+      <section class="stats-section">
+        <div class="stat-box">
+          <h3>Total Drivers</h3>
+          <p class="stat-value">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Total Bookings</h3>
+          <p class="stat-value">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Total Income</h3>
+          <p class="stat-value">$0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Total Expenses</h3>
+          <p class="stat-value">$0</p>
+        </div>
+      </section>
+  
+      <section class="chart-section">
+        <h3>Income vs Expenses</h3>
+        <div class="chart-placeholder">
+          Chart Placeholder
+        </div>
+      </section>
+    </div>
+  </main>
+
+<footer>
+  © 2025 Polo Car Rental Management System. All rights reserved.
+</footer>
+</div>
+</div>
+</div>
+
+<script src="/frontend/src/components/Navbar/nav.ts" type="module"></script>
+<script src="/frontend/src/pages/Dashboard/dashboard.ts" type="module"></script>
+<script src="/frontend/src/components/Aside/aside.ts" type="module"></script>
 </body>
 </html>
+
+    
+
