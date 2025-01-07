@@ -1,6 +1,6 @@
 // services/priceService.ts
 
-const API_URL = "http://localhost:3000/api/prices"; // Update this URL to the correct one for your project
+const API_URL = "http://localhost:3333/prices"; // Update this URL to the correct one for your project
 
 // Fetch all price data
 export const fetchPrices = async (): Promise<any[]> => {

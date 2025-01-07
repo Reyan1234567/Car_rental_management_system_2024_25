@@ -1,6 +1,6 @@
 // services/vehicleService.ts
 
-const API_URL = "http://localhost:3000/api/vehicles"; // Update this URL to match your project's backend API
+const API_URL = "http://localhost:3333/vehicles"; // Update this URL to match your project's backend API
 
 // Fetch all vehicles
 export const fetchVehicles = async (): Promise<any[]> => {

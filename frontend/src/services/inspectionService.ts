@@ -3,7 +3,7 @@
 import { FetchWrapper } from "../utils/fetchWrapper";
 
 
-const inspectionApi = "http://localhost:3000/api/inspections";
+const inspectionApi = "http://localhost:3333/inspections";
 
 // Function to fetch all inspections
 async function fetchInspections() {

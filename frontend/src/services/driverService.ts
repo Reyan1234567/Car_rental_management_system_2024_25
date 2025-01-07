@@ -1,6 +1,6 @@
 // services/driverService.ts
 
-const API_URL = "http://localhost:3000/api"; // Update to match your backend API URL
+const API_URL = "http://localhost:3333"; // Update to match your backend API URL
 
 // Fetch all drivers
 export const fetchDrivers = async (): Promise<any[]> => {

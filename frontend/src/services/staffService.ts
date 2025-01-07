@@ -1,6 +1,6 @@
 // services/staffService.ts
 
-const API_URL = "http://localhost:3000/api/staff"; // Update this URL to match your project's backend API
+const API_URL = "http://localhost:3000/employees"; // Update this URL to match your project's backend API
 
 // Fetch all staff data
 export const fetchStaff = async (): Promise<any[]> => {
