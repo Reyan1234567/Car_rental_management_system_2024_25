@@ -1,47 +1,55 @@
-// pages/Price/Price.ts
+// Price Management Script
 
-import { fetchPrices, addPrice, updatePrice, deletePrice } from '../../services/priceService';
+const addPriceBtn = document.getElementById('addPriceBtn') as HTMLButtonElement;
+const priceForm = document.getElementById('PriceForm') as HTMLDivElement;
+const priceTableBody = document.getElementById('priceTableBody') as HTMLTableSectionElement;
+const overlay = document.createElement('div');
+overlay.id = 'overlay';
+document.body.appendChild(overlay);
 
-const loadPrices = async () => {
-    try {
-        const prices = await fetchPrices();
-        console.log("Prices loaded:", prices);
-        // Handle the display of prices on your page here
-    } catch (error) {
-        console.error("Error loading prices:", error);
-    }
-};
+// Show form for adding price
+addPriceBtn.addEventListener('click', () => {
+  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
+  formTitle.textContent = 'Add Price';
+  (document.getElementById('priceForm') as HTMLFormElement).reset();
+  priceForm.style.display = 'block';
+  overlay.style.display = 'block';
+});
 
-// Example usage for adding a new price
-const newPrice = { vehicleType: "SUV", price: 100 };
-const addNewPrice = async () => {
-    try {
-        const addedPrice = await addPrice(newPrice);
-        console.log("Price added:", addedPrice);
-    } catch (error) {
-        console.error("Error adding price:", error);
-    }
-};
+// Cancel form
+document.getElementById('cancelForm')!.addEventListener('click', resetForm);
 
-// Example usage for updating a price
-const updatedPrice = { vehicleType: "SUV", price: 120 };
-const updateExistingPrice = async (id: string) => {
-    try {
-        const updatedPriceData = await updatePrice(id, updatedPrice);
-        console.log("Price updated:", updatedPriceData);
-    } catch (error) {
-        console.error("Error updating price:", error);
-    }
-};
+// Submit form
+const priceFormElement = document.getElementById('priceForm') as HTMLFormElement;
+priceFormElement.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-// Example usage for deleting a price
-const deleteExistingPrice = async (id: string) => {
-    try {
-        await deletePrice(id);
-        console.log("Price deleted");
-    } catch (error) {
-        console.error("Error deleting price:", error);
-    }
-};
+  const priceID = (document.getElementById('priceID') as HTMLInputElement).value;
+  const vehicleID = (document.getElementById('vehicleID') as HTMLInputElement).value;
+  const rentalPrice = (document.getElementById('rentalPrice') as HTMLInputElement).value;
 
-loadPrices(); // Call the loadPrices function when the page is loaded
+  addPriceToTable(priceID, vehicleID, rentalPrice);
+  resetForm();
+});
+
+// Add price row
+function addPriceToTable(id: string, vehicleID: string, rentalPrice: string) {
+  const newRow = document.createElement('tr');
+  newRow.dataset.priceId = id;
+  newRow.innerHTML = `
+    <td>${id}</td>
+    <td>${vehicleID}</td>
+    <td>${rentalPrice}</td>
+    <td>
+      <button class="btn btn-warning btn-sm">Edit</button>
+      <button class="btn btn-danger btn-sm">Delete</button>
+    </td>`;
+  priceTableBody.appendChild(newRow);
+}
+
+// Reset form
+function resetForm() {
+  priceForm.style.display = 'none';
+  overlay.style.display = 'none';
+  priceFormElement.reset();
+}

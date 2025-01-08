@@ -1,71 +1,77 @@
-// pages/Vehicle/Vehicle.ts
+// Vehicle Management Script
 
-import { fetchVehicles, addVehicle, updateVehicle, deleteVehicle } from '../../services/vehicleService';
+const addVehicleBtn = document.getElementById('addVehicleBtn') as HTMLButtonElement;
+const vehicleForm = document.getElementById('VehicleForm') as HTMLDivElement;
+const vehicleTableBody = document.getElementById('vehicleTableBody') as HTMLTableSectionElement;
+const overlay = document.createElement('div');
+overlay.id = 'overlay';
+document.body.appendChild(overlay);
 
-// Function to load and display all vehicles
-const loadVehicles = async () => {
-    try {
-        const vehicles = await fetchVehicles();
-        console.log("Vehicles loaded:", vehicles);
-        // Handle the display of vehicles on your page here
-        displayVehicles(vehicles);
-    } catch (error) {
-        console.error("Error loading vehicles:", error);
-    }
-};
+// Show form for adding a vehicle
+addVehicleBtn.addEventListener('click', () => {
+  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
+  formTitle.textContent = 'Add Vehicle';
+  (document.getElementById('vehicleForm') as HTMLFormElement).reset();
+  vehicleForm.style.display = 'block';
+  overlay.style.display = 'block';
+});
 
-// Function to display vehicles (for example, in a table)
-const displayVehicles = (vehicles: any[]) => {
-    const vehicleTable = document.getElementById("vehicleTable");
-    if (!vehicleTable) return;
+// Cancel form
+document.getElementById('cancelForm')!.addEventListener('click', resetForm);
 
-    vehicles.forEach(vehicle => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${vehicle.model}</td>
-            <td>${vehicle.brand}</td>
-            <td>${vehicle.year}</td>
-            <td><button onclick="editVehicle(${vehicle.id})">Edit</button></td>
-            <td><button onclick="deleteVehicle(${vehicle.id})">Delete</button></td>
-        `;
-        vehicleTable.appendChild(row);
-    });
-};
+// Submit form
+const vehicleFormElement = document.getElementById('vehicleForm') as HTMLFormElement;
+vehicleFormElement.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-// Example usage for adding a new vehicle
-const newVehicle = { model: "Toyota Corolla", brand: "Toyota", year: 2020 };
-const addNewVehicle = async () => {
-    try {
-        const addedVehicle = await addVehicle(newVehicle);
-        console.log("Vehicle added:", addedVehicle);
-        loadVehicles();  // Reload vehicles after adding
-    } catch (error) {
-        console.error("Error adding vehicle:", error);
-    }
-};
+  const vehicleID = (document.getElementById('vehicleID') as HTMLInputElement).value;
+  const licensePlate = (document.getElementById('licensePlate') as HTMLInputElement).value;
+  const make = (document.getElementById('make') as HTMLInputElement).value;
+  const year = (document.getElementById('year') as HTMLInputElement).value;
+  const mileage = (document.getElementById('mileage') as HTMLInputElement).value;
+  const isOccupied = (document.getElementById('isOccupied') as HTMLSelectElement).value;
+  const rentalPrice = (document.getElementById('rentalPrice') as HTMLInputElement).value;
+  const startDate = (document.getElementById('startDate') as HTMLInputElement).value;
+  const endDate = (document.getElementById('endDate') as HTMLInputElement).value;
 
-// Example usage for updating a vehicle
-const updatedVehicle = { model: "Toyota Corolla", brand: "Toyota", year: 2021 };
-const updateExistingVehicle = async (id: string) => {
-    try {
-        const updatedVehicleData = await updateVehicle(id, updatedVehicle);
-        console.log("Vehicle updated:", updatedVehicleData);
-        loadVehicles();  // Reload vehicles after update
-    } catch (error) {
-        console.error("Error updating vehicle:", error);
-    }
-};
+  addVehicleToTable(vehicleID, licensePlate, make, year, mileage, isOccupied, rentalPrice, startDate, endDate);
+  resetForm();
+});
 
-// Example usage for deleting a vehicle
-const deleteExistingVehicle = async (id: string) => {
-    try {
-        await deleteVehicle(id);
-        console.log("Vehicle deleted");
-        loadVehicles();  // Reload vehicles after deletion
-    } catch (error) {
-        console.error("Error deleting vehicle:", error);
-    }
-};
+// Add vehicle row
+function addVehicleToTable(
+  id: string,
+  licensePlate: string,
+  make: string,
+  year: string,
+  mileage: string,
+  isOccupied: string,
+  rentalPrice: string,
+  startDate: string,
+  endDate: string
+) {
+  const newRow = document.createElement('tr');
+  newRow.dataset.vehicleId = id;
+  newRow.innerHTML = `
+    <td>${id}</td>
+    <td>${licensePlate}</td>
+    <td>${make}</td>
+    <td>${year}</td>
+    <td>${mileage}</td>
+    <td>${isOccupied === 'true' ? 'Yes' : 'No'}</td>
+    <td>${rentalPrice}</td>
+    <td>${startDate}</td>
+    <td>${endDate}</td>
+    <td>
+      <button class="btn btn-warning btn-sm">Edit</button>
+      <button class="btn btn-danger btn-sm">Delete</button>
+    </td>`;
+  vehicleTableBody.appendChild(newRow);
+}
 
-// Call the loadVehicles function when the page is loaded
-loadVehicles();
+// Reset form
+function resetForm() {
+  vehicleForm.style.display = 'none';
+  overlay.style.display = 'none';
+  vehicleFormElement.reset();
+}

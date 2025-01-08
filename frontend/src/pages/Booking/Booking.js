@@ -1,132 +1,105 @@
-let form = document.getElementById("myForm"),
-    imgInput = document.querySelector(".img"),
-    file = document.getElementById("imgInput"),
-    userName = document.getElementById("name"),
-    city = document.getElementById("city"),
-    email = document.getElementById("email"),
-    phone = document.getElementById("phone"),
-    post = document.getElementById("post"),
-    sDate = document.getElementById("sDate"),
-    eDate = document.getElementById("eDate"), // Expiry Date
-    submitBtn = document.querySelector(".submit"),
-    userInfo = document.getElementById("data"),
-    modal = document.getElementById("userForm"),
-    modalTitle = document.querySelector("#userForm .modal-title"),
-    newUserBtn = document.querySelector(".newUser");
-
-let getData = localStorage.getItem('userProfile') ? JSON.parse(localStorage.getItem('userProfile')) : [];
-
-let isEdit = false, editId;
-showInfo();
-
-newUserBtn.addEventListener('click', () => {
-    submitBtn.innerText = 'Submit',
-    modalTitle.innerText = "Fill the Form";
-    isEdit = false;
-    imgInput.src = "./image/Profile Icon.webp";
-    form.reset();
+// Get elements
+var addBookingBtn = document.getElementById('addBookingBtn');
+var bookingForm = document.getElementById('BookingForm');
+var bookingTableBody = document.getElementById('bookingTableBody');
+var overlay = document.createElement('div');
+overlay.id = 'overlay';
+document.body.appendChild(overlay);
+// Add Booking Button functionality
+addBookingBtn.addEventListener('click', function () {
+    // Clear the form fields for new entry
+    var formTitle = document.getElementById('formTitle');
+    formTitle.textContent = 'Add Booking';
+    document.getElementById('bookingForm').reset();
+    bookingForm.style.display = 'block';
+    overlay.style.display = 'block';
 });
-
-file.onchange = function () {
-    if (file.files[0].size < 1000000) {  // 1MB = 1000000
-        var fileReader = new FileReader();
-
-        fileReader.onload = function (e) {
-            imgUrl = e.target.result;
-            imgInput.src = imgUrl;
-        }
-
-        fileReader.readAsDataURL(file.files[0]);
-    } else {
-        alert("This file is too large!");
-    }
-}
-
-function showInfo() {
-    document.querySelectorAll('.employeeDetails').forEach(info => info.remove());
-    getData.forEach((element, index) => {
-        let createElement = `<tr class="employeeDetails">
-            <td>${index + 1}</td>
-            <td><img src="${element.picture}" alt="" width="50" height="50"></td>
-            <td>${element.employeeName}</td>
-            <td>${element.employeeCity}</td>
-            <td>${element.employeeEmail}</td>
-            <td>${element.employeePhone}</td>
-            <td>${element.employeePost}</td>
-            <td>${element.startDate}</td>
-            <td>${element.expireDate}</td> <!-- Expiry Date Column -->
-            <td> <!-- Action Column -->
-                <button class="btn btn-success" onclick="readInfo('${element.picture}', '${element.employeeName}', '${element.employeeCity}', '${element.employeeEmail}', '${element.employeePhone}', '${element.employeePost}', '${element.startDate}', '${element.expireDate}')" data-bs-toggle="modal" data-bs-target="#readData"><i class="bi bi-eye"></i></button>
-
-                <button class="btn btn-primary" onclick="editInfo(${index}, '${element.picture}', '${element.employeeName}', '${element.employeeCity}', '${element.employeeEmail}', '${element.employeePhone}', '${element.employeePost}', '${element.startDate}', '${element.expireDate}')" data-bs-toggle="modal" data-bs-target="#userForm"><i class="bi bi-pencil-square"></i></button>
-
-                <button class="btn btn-danger" onclick="deleteInfo(${index})"><i class="bi bi-trash"></i></button>
-            </td> 
-        </tr>`;
-        userInfo.insertAdjacentHTML('beforeend', createElement);
-    });
-}
-
-form.addEventListener('submit', function (e) {
+// Cancel Button functionality
+var cancelFormBtn = document.getElementById('cancelForm');
+cancelFormBtn.addEventListener('click', function () {
+    bookingForm.style.display = 'none';
+    overlay.style.display = 'none';
+});
+// Form Submit functionality
+var bookingFormElement = document.getElementById('bookingForm');
+bookingFormElement.addEventListener('submit', function (e) {
     e.preventDefault();
-
-    const information = {
-        picture: imgInput.src == undefined ? "./image/Profile Icon.webp" : imgInput.src,
-        employeeName: userName.value,
-        employeeCity: city.value,
-        employeeEmail: email.value,
-        employeePhone: phone.value,
-        employeePost: post.value,
-        startDate: sDate.value,
-        expireDate: eDate.value // Expiry Date
-    };
-
-    if (isEdit) {
-        getData.splice(editId, 1, information);
-    } else {
-        getData.push(information);
+    // Gather data from the form fields
+    var bookingID = document.getElementById('bookingID').value;
+    var vehicleID = document.getElementById('vehicleID').value;
+    var driverID = document.getElementById('driverID').value;
+    var startDate = document.getElementById('startDate').value;
+    var endDate = document.getElementById('endDate').value;
+    var totalPrice = document.getElementById('totalPrice').value;
+    var status = document.getElementById('status').value;
+    // Check if it's an edit or add operation
+    if (bookingID && isEdit) {
+        editBookingInTable(bookingID, vehicleID, driverID, startDate, endDate, totalPrice, status);
     }
-    localStorage.setItem("userProfile", JSON.stringify(getData));
-    showInfo();
-    document.querySelector("#userForm .btn-close").click();
+    else {
+        // Create a new booking row in the table
+        var newRow = document.createElement('tr');
+        newRow.dataset.bookingId = bookingID;
+        newRow.innerHTML = "\n      <td>".concat(bookingID, "</td>\n      <td>").concat(vehicleID, "</td>\n      <td>").concat(driverID, "</td>\n      <td>").concat(startDate, "</td>\n      <td>").concat(endDate, "</td>\n      <td>").concat(totalPrice, "</td>\n      <td>").concat(status, "</td>\n      <td>\n        <button class=\"btn btn-warning btn-sm\" onclick=\"editBooking(event)\">Edit</button>\n        <button class=\"btn btn-danger btn-sm\" onclick=\"deleteBooking(event)\">Delete</button>\n      </td>\n    ");
+        bookingTableBody.appendChild(newRow);
+    }
+    // Reset and hide the form
+    resetForm();
 });
-
-function readInfo(picture, name, city, email, phone, post, sDate, eDate) {
-    document.querySelector('.showImg').src = picture;
-    document.getElementById('showName').value = name;
-    document.getElementById('showCity').value = city;
-    document.getElementById('showEmail').value = email;
-    document.getElementById('showPhone').value = phone;
-    document.getElementById('showPost').value = post;
-    document.getElementById('showsDate').value = sDate;
-    document.getElementById('showExpireDate').value = eDate; // Expiry Date
-}
-
-function editInfo(id, picture, name, city, email, phone, post, sDate, eDate) {
-    imgInput.src = picture;
-    userName.value = name;
-    city.value = city;
-    email.value = email;
-    phone.value = phone;
-    post.value = post;
-    sDate.value = sDate;
-    eDate.value = eDate; // Expiry Date
-
-    editId = id;
-    isEdit = true;
-    submitBtn.innerText = "Update";
-    modalTitle.innerText = "Edit the Form";
-}
-
-function deleteInfo(index) {
-    // Show a confirmation dialog
-    const isConfirmed = confirm("Are you sure you want to delete this record?");
-    
-    // If the user confirms, proceed with deletion
-    if (isConfirmed) {
-        getData.splice(index, 1);
-        localStorage.setItem("userProfile", JSON.stringify(getData));
-        showInfo();
+// Flag to check if we are editing
+var isEdit = false;
+var currentEditRow = null;
+// Edit Booking functionality
+function editBooking(event) {
+    var row = event.target.closest('tr');
+    var cells = row === null || row === void 0 ? void 0 : row.getElementsByTagName('td');
+    if (cells) {
+        var bookingID = cells[0].innerText;
+        var vehicleID = cells[1].innerText;
+        var driverID = cells[2].innerText;
+        var startDate = cells[3].innerText;
+        var endDate = cells[4].innerText;
+        var totalPrice = cells[5].innerText;
+        var status_1 = cells[6].innerText;
+        // Fill the form with the current booking data
+        document.getElementById('bookingID').value = bookingID;
+        document.getElementById('vehicleID').value = vehicleID;
+        document.getElementById('driverID').value = driverID;
+        document.getElementById('startDate').value = startDate;
+        document.getElementById('endDate').value = endDate;
+        document.getElementById('totalPrice').value = totalPrice;
+        document.getElementById('status').value = status_1;
+        isEdit = true;
+        currentEditRow = row;
+        bookingForm.style.display = 'block';
+        overlay.style.display = 'block';
     }
-    // If the user cancels, do nothing
+}
+// Delete Booking functionality
+function deleteBooking(event) {
+    var row = event.target.closest('tr');
+    if (row) {
+        row.remove();
+    }
+}
+// Edit the booking in the table after form submission
+function editBookingInTable(bookingID, vehicleID, driverID, startDate, endDate, totalPrice, status) {
+    if (currentEditRow) {
+        var cells = currentEditRow.getElementsByTagName('td');
+        cells[0].innerText = bookingID;
+        cells[1].innerText = vehicleID;
+        cells[2].innerText = driverID;
+        cells[3].innerText = startDate;
+        cells[4].innerText = endDate;
+        cells[5].innerText = totalPrice;
+        cells[6].innerText = status;
+    }
+    resetForm();
+}
+// Reset the form and hide it
+function resetForm() {
+    bookingForm.style.display = 'none';
+    overlay.style.display = 'none';
+    isEdit = false;
+    currentEditRow = null;
 }

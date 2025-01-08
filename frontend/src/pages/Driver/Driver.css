@@ -11,12 +11,7 @@ img {
   color: #ffffff;
   min-height: 100vh;
   padding: 20px;
-
   width: 15%;
-}
-
-#sidebar h3 {
-  font-size: 1.5rem;
 }
 
 #sidebar .nav-link {
@@ -40,42 +35,33 @@ img {
   padding: 30px;
 }
 
-#main-content h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
 .table th {
   background-color: #343a40;
   color: #ffffff;
 }
 
-.modal-content {
+#DriverForm {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  background-color: #343a40;
+  color: white;
+  width: 50%;
+  padding: 2%;
   border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1050;
+  display: none;
 }
 
-.btn-primary {
-  background-color: rgb(216, 96, 14);
-  border-color: rgb(216, 96, 14);
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.btn-close {
-  background-color: transparent;
-  border: none;
-}
-
-@media (max-width: 768px) {
-  #sidebar {
-    min-height: auto;
-    padding: 10px;
-  }
-
-  #main-content {
-    padding: 20px;
-  }
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  display: none;
 }

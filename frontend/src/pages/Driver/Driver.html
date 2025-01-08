@@ -15,7 +15,7 @@
   <body>
     <div class="d-flex">
       <div id="sidebar">
-        <img src="../../assets/Images/Polo.png" alt="" />
+        <img src="../../assets/Images/Polo.png" alt="Logo" />
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a>
@@ -32,13 +32,11 @@
           <li class="nav-item">
             <a class="nav-link" href="../Employee/Employee.html">Employees</a>
           </li>
-          <li>
+          <li class="nav-item">
             <a class="nav-link" href="../Booking/Booking.html">Booking</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Inspection/Inspection.html"
-              >Inspections</a
-            >
+            <a class="nav-link" href="../Inspection/Inspection.html">Inspections</a>
           </li>
         </ul>
       </div>
@@ -54,12 +52,12 @@
           <table class="table table-striped table-bordered">
             <thead>
               <tr>
-                <th>driverID</th>
-                <th>name</th>
-                <th>licenseNumber</th>
-                <th>phone</th>
-                <th>email</th>
-                <th>status</th>
+                <th>Driver ID</th>
+                <th>Name</th>
+                <th>License Number</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -71,63 +69,82 @@
       </div>
     </div>
 
-    <div
-      class="modal fade"
-      id="driverModal"
-      tabindex="-1"
-      aria-labelledby="modalTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitle">Add Driver</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="driverForm">
-              <div class="mb-3">
-                <label for="driverName" class="form-label">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="driverName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="driverPhone" class="form-label">Phone</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="driverPhone"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="driverLicense" class="form-label"
-                  >License Number</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="driverLicense"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary">Save</button>
-            </form>
-          </div>
+    <!-- Driver Form -->
+    <div id="DriverForm">
+      <form id="driverForm">
+        <h2 id="formTitle">Add Driver</h2>
+        <div class="mb-3">
+          <label for="driverID" class="form-label">Driver ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="driverID"
+            name="driverID"
+            required
+          />
         </div>
-      </div>
+        <div class="mb-3">
+          <label for="driverName" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="driverName"
+            name="driverName"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="licenseNumber" class="form-label">License Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="licenseNumber"
+            name="licenseNumber"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="driverPhone" class="form-label">Phone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="driverPhone"
+            name="driverPhone"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="driverEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="driverEmail"
+            name="driverEmail"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="driverStatus" class="form-label">Status</label>
+          <select
+            class="form-control"
+            id="driverStatus"
+            name="driverStatus"
+            required
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./Driver.ts"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <script type="module" src="./Driver.js"></script>
   </body>
 </html>

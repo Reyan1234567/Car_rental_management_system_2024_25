@@ -1,20 +1,30 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "@types/bootstrap": "^5.2.10",
     "bootstrap": "^5.3.3",
-    "typescript": "^5.7.2"
+    "tslint": "^5.20.1"
   },
   "devDependencies": {
-    "lite-server": "^2.6.1"
-  }
+    "lite-server": "^2.6.1",
+    "typescript": "^5.7.2"
+  },
+  "description": "",
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts"
 }

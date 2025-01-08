@@ -15,7 +15,7 @@
   <body>
     <div class="d-flex">
       <div id="sidebar">
-        <img src="../../assets/Images/Polo.png" alt="" />
+        <img src="../../assets/Images/Polo.png" alt="Logo" />
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a>
@@ -30,19 +30,13 @@
             <a class="nav-link" href="../Price/Price.html">Pricing</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Employee/Employee.html"
-              >Employees</a
-            >
-          </li>
-          <li>
-            <a class="nav-link" href="../Booking/Booking.html"
-              >Booking</a
-            >            
+            <a class="nav-link" href="../Employee/Employee.html">Employees</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../Inspection/Inspection.html"
-              >Inspections</a
-            >
+            <a class="nav-link" href="../Booking/Booking.html">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../Inspection/Inspection.html">Inspections</a>
           </li>
         </ul>
       </div>
@@ -69,70 +63,97 @@
               </tr>
             </thead>
             <tbody id="inspectionTableBody">
+              <!-- Populated dynamically -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <div
-      class="modal fade"
-      id="inspectionModal"
-      tabindex="-1"
-      aria-labelledby="modalTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitle">Add Inspection</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="inspectionForm">
-              <div class="mb-3">
-                <label for="inspectionVehicle" class="form-label">Vehicle</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inspectionVehicle"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="inspectionDate" class="form-label">Date</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="inspectionDate"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="inspectionStatus" class="form-label">Status</label>
-                <select
-                  class="form-control"
-                  id="inspectionStatus"
-                  required
-                >
-                  <option value="Passed">Passed</option>
-                  <option value="Failed">Failed</option>
-                  <option value="Pending">Pending</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Save</button>
-            </form>
-          </div>
+    <!-- Inspection Form -->
+    <div id="InspectionForm">
+      <form id="inspectionForm">
+        <h2 id="formTitle">Add Inspection</h2>
+        <div class="mb-3">
+          <label for="inspectionID" class="form-label">Inspection ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inspectionID"
+            name="inspectionID"
+            required
+          />
         </div>
-      </div>
+        <div class="mb-3">
+          <label for="vehicleID" class="form-label">Vehicle ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="vehicleID"
+            name="vehicleID"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="inspectionDate" class="form-label">Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="inspectionDate"
+            name="inspectionDate"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="inspectorName" class="form-label">Inspector Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inspectorName"
+            name="inspectorName"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="inspectionStatus" class="form-label">Status</label>
+          <select
+            class="form-control"
+            id="inspectionStatus"
+            name="inspectionStatus"
+            required
+          >
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="inspectionPrice" class="form-label">Price</label>
+          <input
+            type="number"
+            class="form-control"
+            id="inspectionPrice"
+            name="inspectionPrice"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="inspectionComments" class="form-label">Comments</label>
+          <textarea
+            class="form-control"
+            id="inspectionComments"
+            name="inspectionComments"
+          ></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
     <script type="module" src="./Inspection.ts"></script>
   </body>
 </html>

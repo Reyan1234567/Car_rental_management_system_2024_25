@@ -1,91 +1,132 @@
-// pages/Driver/Driver.ts
+// Employee Management Script
 
-import {
-    fetchDrivers,
-    fetchDriver,
-    addDriver,
-    updateDriver,
-    deleteDriver,
-  } from "../../services/driverService";
-  
-  const driverTableBody = document.getElementById("driverTableBody") as HTMLElement;
-  const addDriverBtn = document.getElementById("addDriverBtn") as HTMLElement;
-  const driverModal = document.getElementById("driverModal") as HTMLElement;
-  const driverForm = document.getElementById("driverForm") as HTMLFormElement;
-  
-  let editingDriverId: string | null = null;
-  
-  // Load and display drivers
-  async function loadDrivers() {
-    driverTableBody.innerHTML = "";
-    try {
-      const drivers = await fetchDrivers();
-      drivers.forEach((driver, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${driver.name}</td>
-          <td>${driver.phone}</td>
-          <td>${driver.licenseNumber}</td>
-          <td>
-            <button class="btn btn-warning btn-sm edit-btn" data-id="${driver.id}">Edit</button>
-            <button class="btn btn-danger btn-sm delete-btn" data-id="${driver.id}">Delete</button>
-          </td>
-        `;
-        driverTableBody.appendChild(row);
-      });
-    } catch (error) {
-      console.error("Error loading drivers:", error);
-    }
+// Get elements
+const addEmployeeBtn = document.getElementById('addEmployeeBtn') as HTMLButtonElement;
+const employeeForm = document.getElementById('EmployeeForm') as HTMLDivElement;
+const employeeTableBody = document.getElementById('employeeTableBody') as HTMLTableSectionElement;
+const overlay = document.createElement('div');
+overlay.id = 'overlay';
+document.body.appendChild(overlay);
+
+// Add Employee Button functionality
+addEmployeeBtn.addEventListener('click', () => {
+  // Clear the form fields for new entry
+  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
+  formTitle.textContent = 'Add Employee';
+  (document.getElementById('employeeForm') as HTMLFormElement).reset();
+  employeeForm.style.display = 'block';
+  overlay.style.display = 'block';
+});
+
+// Cancel Button functionality
+const cancelFormBtn = document.getElementById('cancelForm') as HTMLButtonElement;
+cancelFormBtn.addEventListener('click', () => {
+  resetForm();
+});
+
+// Form Submit functionality
+const employeeFormElement = document.getElementById('employeeForm') as HTMLFormElement;
+employeeFormElement.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Gather data from the form fields
+  const employeeID = (document.getElementById('employeeID') as HTMLInputElement).value;
+  const employeeName = (document.getElementById('employeeName') as HTMLInputElement).value;
+  const employeeRole = (document.getElementById('employeeRole') as HTMLInputElement).value;
+  const employeePhone = (document.getElementById('employeePhone') as HTMLInputElement).value;
+  const employeeEmail = (document.getElementById('employeeEmail') as HTMLInputElement).value;
+  const employeeStatus = (document.getElementById('employeeStatus') as HTMLSelectElement).value;
+
+  if (isEdit && currentEditRow) {
+    editEmployeeInTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
+  } else {
+    addEmployeeToTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
   }
-  
-  // Handle form submission
-  driverForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-  
-    const name = (document.getElementById("driverName") as HTMLInputElement).value;
-    const phone = (document.getElementById("driverPhone") as HTMLInputElement).value;
-    const licenseNumber = (document.getElementById("driverLicense") as HTMLInputElement).value;
-  
-    try {
-      if (editingDriverId) {
-        await updateDriver(editingDriverId, { name, phone, licenseNumber });
-      } else {
-        await addDriver({ name, phone, licenseNumber });
-      }
-      loadDrivers();
-      driverForm.reset();
-      driverModal.style.display = "none";
-    } catch (error) {
-      console.error("Error saving driver:", error);
-    }
-  });
-  
-  // Handle add button click
-  addDriverBtn.addEventListener("click", () => {
-    editingDriverId = null;
-    driverForm.reset();
-    driverModal.style.display = "block";
-  });
-  
-  // Handle edit and delete actions
-  driverTableBody.addEventListener("click", async (e) => {
-    const target = e.target as HTMLElement;
-  
-    if (target.classList.contains("edit-btn")) {
-      editingDriverId = target.dataset.id!;
-      const driver = await fetchDriver(editingDriverId);
-      (document.getElementById("driverName") as HTMLInputElement).value = driver.name;
-      (document.getElementById("driverPhone") as HTMLInputElement).value = driver.phone;
-      (document.getElementById("driverLicense") as HTMLInputElement).value = driver.licenseNumber;
-      driverModal.style.display = "block";
-    } else if (target.classList.contains("delete-btn")) {
-      const driverId = target.dataset.id!;
-      await deleteDriver(driverId);
-      loadDrivers();
-    }
-  });
-  
-  // Initialize page
-  loadDrivers();
-  
+
+  resetForm();
+});
+
+// Flag to check if we are editing
+let isEdit = false;
+let currentEditRow: HTMLTableRowElement | null = null;
+
+// Add Employee to Table
+function addEmployeeToTable(employeeID: string, employeeName: string, employeeRole: string, employeePhone: string, employeeEmail: string, employeeStatus: string): void {
+  const newRow = document.createElement('tr');
+  newRow.dataset.employeeId = employeeID;
+
+  newRow.innerHTML = `
+    <td>${employeeID}</td>
+    <td>${employeeName}</td>
+    <td>${employeeRole}</td>
+    <td>${employeePhone}</td>
+    <td>${employeeEmail}</td>
+    <td>${employeeStatus}</td>
+    <td>
+      <button class="btn btn-warning btn-sm" onclick="editEmployee(event)">Edit</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteEmployee(event)">Delete</button>
+    </td>
+  `;
+
+  employeeTableBody.appendChild(newRow);
+}
+
+// Edit Employee functionality
+function editEmployee(event: MouseEvent): void {
+  const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
+  if (!row) return;
+
+  const cells = row.getElementsByTagName('td');
+  const [employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus] = [
+    cells[0].innerText,
+    cells[1].innerText,
+    cells[2].innerText,
+    cells[3].innerText,
+    cells[4].innerText,
+    cells[5].innerText,
+  ];
+
+  (document.getElementById('employeeID') as HTMLInputElement).value = employeeID;
+  (document.getElementById('employeeName') as HTMLInputElement).value = employeeName;
+  (document.getElementById('employeeRole') as HTMLInputElement).value = employeeRole;
+  (document.getElementById('employeePhone') as HTMLInputElement).value = employeePhone;
+  (document.getElementById('employeeEmail') as HTMLInputElement).value = employeeEmail;
+  (document.getElementById('employeeStatus') as HTMLSelectElement).value = employeeStatus;
+
+  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
+  formTitle.textContent = 'Edit Employee';
+
+  employeeForm.style.display = 'block';
+  overlay.style.display = 'block';
+
+  isEdit = true;
+  currentEditRow = row;
+}
+
+// Edit the employee row in the table
+function editEmployeeInTable(employeeID: string, employeeName: string, employeeRole: string, employeePhone: string, employeeEmail: string, employeeStatus: string): void {
+  if (!currentEditRow) return;
+
+  const cells = currentEditRow.getElementsByTagName('td');
+  cells[0].innerText = employeeID;
+  cells[1].innerText = employeeName;
+  cells[2].innerText = employeeRole;
+  cells[3].innerText = employeePhone;
+  cells[4].innerText = employeeEmail;
+  cells[5].innerText = employeeStatus;
+}
+
+// Delete Employee functionality
+function deleteEmployee(event: MouseEvent): void {
+  const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
+  row?.remove();
+}
+
+// Reset form and hide it after submission or cancel
+function resetForm(): void {
+  employeeForm.style.display = 'none';
+  overlay.style.display = 'none';
+  isEdit = false;
+  currentEditRow = null;
+  employeeFormElement.reset();
+}

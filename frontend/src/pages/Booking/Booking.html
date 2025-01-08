@@ -15,7 +15,7 @@
   <body>
     <div class="d-flex">
       <div id="sidebar">
-        <img src="../../assets/Images/Polo.png" alt="" />
+        <img src="../../assets/Images/Polo.png" alt="Logo" />
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" href="../Dashboard/Dashboard.html">Dashboard</a>
@@ -30,19 +30,13 @@
             <a class="nav-link" href="../Price/Price.html">Pricing</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Employee/Employee.html"
-              >Employees</a
-            >
-          </li>
-          <li>
-            <a class="nav-link active" href="../Booking/Booking.html"
-              >Booking</a
-            >            
+            <a class="nav-link" href="../Employee/Employee.html">Employees</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../Inspection/Inspection.html"
-              >Inspections</a
-            >
+            <a class="nav-link active" href="../Booking/Booking.html">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Inspection/Inspection.html">Inspections</a>
           </li>
         </ul>
       </div>
@@ -50,11 +44,10 @@
       <div id="main-content">
         <header class="d-flex justify-content-between align-items-center">
           <h1>Booking Management</h1>
-          <button id="addBookingBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">Add Booking</button>
+          <button id="addBookingBtn" class="btn btn-primary">Add Booking</button>
         </header>
         <hr />
 
-        <!-- Booking Table -->
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
             <thead>
@@ -77,69 +70,92 @@
       </div>
     </div>
 
-    <!-- Add Booking Modal -->
-    <div
-      class="modal fade"
-      id="bookingModal"
-      tabindex="-1"
-      aria-labelledby="bookingModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="bookingModalLabel">Add Booking</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="bookingForm">
-              <div class="mb-3">
-                <label for="customerName" class="form-label">Customer Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="customerName"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="vehicleSelect" class="form-label">Select Vehicle</label>
-                <select class="form-select" id="vehicleSelect" required>
-                  <option value="">Choose Vehicle</option>
-                  <!-- Dynamic vehicle options go here -->
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="bookingDate" class="form-label">Booking Date</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="bookingDate"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="returnDate" class="form-label">Return Date</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="returnDate"
-                  required
-                />
-              </div>
-              <button type="submit" class="btn btn-primary">Save Booking</button>
-            </form>
-          </div>
+    <!-- Booking Form -->
+    <div id="BookingForm">
+      <form id="bookingForm">
+        <h2 id="formTitle">Add Booking</h2>
+        <div class="mb-3">
+          <label for="bookingID" class="form-label">Booking ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="bookingID"
+            name="bookingID"
+            required
+          />
         </div>
-      </div>
+        <div class="mb-3">
+          <label for="vehicleID" class="form-label">Vehicle ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="vehicleID"
+            name="vehicleID"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="driverID" class="form-label">Driver ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="driverID"
+            name="driverID"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="startDate"
+            name="startDate"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="endDate"
+            name="endDate"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="totalPrice" class="form-label">Total Price</label>
+          <input
+            type="number"
+            class="form-control"
+            id="totalPrice"
+            name="totalPrice"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select
+            class="form-control"
+            id="status"
+            name="status"
+            required
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./Booking.ts"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <script type="module" src="./Booking.js"></script>
   </body>
 </html>
