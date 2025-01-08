@@ -1,5 +1,3 @@
-// pages/StaffManagement/StaffManagement.ts
-
 import { fetchStaff, addStaff, updateStaff, deleteStaff } from '../../services/staffService';
 
 const loadStaff = async () => {
