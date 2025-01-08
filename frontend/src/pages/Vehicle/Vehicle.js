@@ -10,7 +10,7 @@ addVehicleBtn.addEventListener('click', function () {
     var formTitle = document.getElementById('formTitle');
     formTitle.textContent = 'Add Vehicle';
     document.getElementById('vehicleForm').reset();
-    vehicleForm.style.display = 'block';
+    vehicleForm.style.display = 'flex';
     overlay.style.display = 'block';
 });
 // Cancel form

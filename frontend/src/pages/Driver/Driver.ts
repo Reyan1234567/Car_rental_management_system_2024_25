@@ -1,132 +1,122 @@
-// Employee Management Script
+// Driver.ts
 
-// Get elements
-const addEmployeeBtn = document.getElementById('addEmployeeBtn') as HTMLButtonElement;
-const employeeForm = document.getElementById('EmployeeForm') as HTMLDivElement;
-const employeeTableBody = document.getElementById('employeeTableBody') as HTMLTableSectionElement;
-const overlay = document.createElement('div');
-overlay.id = 'overlay';
-document.body.appendChild(overlay);
+document.addEventListener("DOMContentLoaded", () => {
+  const addDriverBtn = document.getElementById("addDriverBtn") as HTMLButtonElement;
+  const driverForm = document.getElementById("driverForm") as HTMLFormElement;
+  const driverTableBody = document.getElementById("driverTableBody") as HTMLTableSectionElement;
+  const driverFormContainer = document.getElementById("DriverForm") as HTMLDivElement;
+  const cancelFormBtn = document.getElementById("cancelForm") as HTMLButtonElement;
 
-// Add Employee Button functionality
-addEmployeeBtn.addEventListener('click', () => {
-  // Clear the form fields for new entry
-  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
-  formTitle.textContent = 'Add Employee';
-  (document.getElementById('employeeForm') as HTMLFormElement).reset();
-  employeeForm.style.display = 'block';
-  overlay.style.display = 'block';
-});
+  let isEditing = false;
+  let editingRow: HTMLTableRowElement | null = null;
 
-// Cancel Button functionality
-const cancelFormBtn = document.getElementById('cancelForm') as HTMLButtonElement;
-cancelFormBtn.addEventListener('click', () => {
-  resetForm();
-});
-
-// Form Submit functionality
-const employeeFormElement = document.getElementById('employeeForm') as HTMLFormElement;
-employeeFormElement.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  // Gather data from the form fields
-  const employeeID = (document.getElementById('employeeID') as HTMLInputElement).value;
-  const employeeName = (document.getElementById('employeeName') as HTMLInputElement).value;
-  const employeeRole = (document.getElementById('employeeRole') as HTMLInputElement).value;
-  const employeePhone = (document.getElementById('employeePhone') as HTMLInputElement).value;
-  const employeeEmail = (document.getElementById('employeeEmail') as HTMLInputElement).value;
-  const employeeStatus = (document.getElementById('employeeStatus') as HTMLSelectElement).value;
-
-  if (isEdit && currentEditRow) {
-    editEmployeeInTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
-  } else {
-    addEmployeeToTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
+  // Driver data model
+  interface Driver {
+    id: string;
+    name: string;
+    licenseNumber: string;
+    phone: string;
+    email: string;
+    status: string;
   }
 
-  resetForm();
+  const drivers: Driver[] = [];
+
+  // Show the driver form
+  const showDriverForm = () => {
+    driverFormContainer.style.display = "block";
+  };
+
+  // Hide the driver form
+  const hideDriverForm = () => {
+    driverFormContainer.style.display = "none";
+    driverForm.reset();
+    isEditing = false;
+    editingRow = null;
+  };
+
+  // Populate the table
+  const populateTable = () => {
+    driverTableBody.innerHTML = "";
+    drivers.forEach((driver) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${driver.id}</td>
+        <td>${driver.name}</td>
+        <td>${driver.licenseNumber}</td>
+        <td>${driver.phone}</td>
+        <td>${driver.email}</td>
+        <td>${driver.status}</td>
+        <td>
+          <button class="btn btn-warning btn-sm edit-btn">Edit</button>
+          <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+        </td>
+      `;
+
+      // Add event listeners for edit and delete
+      const editBtn = row.querySelector(".edit-btn") as HTMLButtonElement;
+      const deleteBtn = row.querySelector(".delete-btn") as HTMLButtonElement;
+
+      editBtn.addEventListener("click", () => editDriver(row, driver));
+      deleteBtn.addEventListener("click", () => deleteDriver(row, driver.id));
+
+      driverTableBody.appendChild(row);
+    });
+  };
+
+  // Add or update a driver
+  driverForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(driverForm);
+    const driver: Driver = {
+      id: formData.get("driverID") as string,
+      name: formData.get("driverName") as string,
+      licenseNumber: formData.get("licenseNumber") as string,
+      phone: formData.get("driverPhone") as string,
+      email: formData.get("driverEmail") as string,
+      status: formData.get("driverStatus") as string,
+    };
+
+    if (isEditing && editingRow) {
+      // Update existing driver
+      const index = drivers.findIndex((d) => d.id === driver.id);
+      drivers[index] = driver;
+    } else {
+      // Add new driver
+      drivers.push(driver);
+    }
+
+    populateTable();
+    hideDriverForm();
+  });
+
+  // Edit a driver
+  const editDriver = (row: HTMLTableRowElement, driver: Driver) => {
+    isEditing = true;
+    editingRow = row;
+
+    (driverForm["driverID"] as HTMLInputElement).value = driver.id;
+    (driverForm["driverName"] as HTMLInputElement).value = driver.name;
+    (driverForm["licenseNumber"] as HTMLInputElement).value = driver.licenseNumber;
+    (driverForm["driverPhone"] as HTMLInputElement).value = driver.phone;
+    (driverForm["driverEmail"] as HTMLInputElement).value = driver.email;
+    (driverForm["driverStatus"] as HTMLSelectElement).value = driver.status;
+
+    showDriverForm();
+  };
+
+  // Delete a driver
+  const deleteDriver = (row: HTMLTableRowElement, driverId: string) => {
+    const index = drivers.findIndex((driver) => driver.id === driverId);
+    if (index !== -1) {
+      drivers.splice(index, 1);
+      row.remove();
+    }
+  };
+
+  // Event listeners
+  addDriverBtn.addEventListener("click", showDriverForm);
+  cancelFormBtn.addEventListener("click", hideDriverForm);
 });
-
-// Flag to check if we are editing
-let isEdit = false;
-let currentEditRow: HTMLTableRowElement | null = null;
-
-// Add Employee to Table
-function addEmployeeToTable(employeeID: string, employeeName: string, employeeRole: string, employeePhone: string, employeeEmail: string, employeeStatus: string): void {
-  const newRow = document.createElement('tr');
-  newRow.dataset.employeeId = employeeID;
-
-  newRow.innerHTML = `
-    <td>${employeeID}</td>
-    <td>${employeeName}</td>
-    <td>${employeeRole}</td>
-    <td>${employeePhone}</td>
-    <td>${employeeEmail}</td>
-    <td>${employeeStatus}</td>
-    <td>
-      <button class="btn btn-warning btn-sm" onclick="editEmployee(event)">Edit</button>
-      <button class="btn btn-danger btn-sm" onclick="deleteEmployee(event)">Delete</button>
-    </td>
-  `;
-
-  employeeTableBody.appendChild(newRow);
-}
-
-// Edit Employee functionality
-function editEmployee(event: MouseEvent): void {
-  const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
-  if (!row) return;
-
-  const cells = row.getElementsByTagName('td');
-  const [employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus] = [
-    cells[0].innerText,
-    cells[1].innerText,
-    cells[2].innerText,
-    cells[3].innerText,
-    cells[4].innerText,
-    cells[5].innerText,
-  ];
-
-  (document.getElementById('employeeID') as HTMLInputElement).value = employeeID;
-  (document.getElementById('employeeName') as HTMLInputElement).value = employeeName;
-  (document.getElementById('employeeRole') as HTMLInputElement).value = employeeRole;
-  (document.getElementById('employeePhone') as HTMLInputElement).value = employeePhone;
-  (document.getElementById('employeeEmail') as HTMLInputElement).value = employeeEmail;
-  (document.getElementById('employeeStatus') as HTMLSelectElement).value = employeeStatus;
-
-  const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
-  formTitle.textContent = 'Edit Employee';
-
-  employeeForm.style.display = 'block';
-  overlay.style.display = 'block';
-
-  isEdit = true;
-  currentEditRow = row;
-}
-
-// Edit the employee row in the table
-function editEmployeeInTable(employeeID: string, employeeName: string, employeeRole: string, employeePhone: string, employeeEmail: string, employeeStatus: string): void {
-  if (!currentEditRow) return;
-
-  const cells = currentEditRow.getElementsByTagName('td');
-  cells[0].innerText = employeeID;
-  cells[1].innerText = employeeName;
-  cells[2].innerText = employeeRole;
-  cells[3].innerText = employeePhone;
-  cells[4].innerText = employeeEmail;
-  cells[5].innerText = employeeStatus;
-}
-
-// Delete Employee functionality
-function deleteEmployee(event: MouseEvent): void {
-  const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
-  row?.remove();
-}
-
-// Reset form and hide it after submission or cancel
-function resetForm(): void {
-  employeeForm.style.display = 'none';
-  overlay.style.display = 'none';
-  isEdit = false;
-  currentEditRow = null;
-  employeeFormElement.reset();
-}

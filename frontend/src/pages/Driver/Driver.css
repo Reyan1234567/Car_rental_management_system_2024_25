@@ -65,3 +65,15 @@ img {
   z-index: 1040;
   display: none;
 }
+
+.btn-primary{
+  background-color:#d8600e;
+}
+
+button{
+  border: #d8600e solid 1px;
+}
+
+.btn-primary:hover{
+  background-color:#343a40;
+}

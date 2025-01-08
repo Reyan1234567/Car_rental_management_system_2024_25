@@ -1,103 +1,83 @@
-// Employee Management Script
-// Get elements
-var addEmployeeBtn = document.getElementById('addEmployeeBtn');
-var employeeForm = document.getElementById('EmployeeForm');
-var employeeTableBody = document.getElementById('employeeTableBody');
-var overlay = document.createElement('div');
-overlay.id = 'overlay';
-document.body.appendChild(overlay);
-// Add Employee Button functionality
-addEmployeeBtn.addEventListener('click', function () {
-    // Clear the form fields for new entry
-    var formTitle = document.getElementById('formTitle');
-    formTitle.textContent = 'Add Employee';
-    document.getElementById('employeeForm').reset();
-    employeeForm.style.display = 'block';
-    overlay.style.display = 'block';
+// Driver.ts
+document.addEventListener("DOMContentLoaded", function () {
+    var addDriverBtn = document.getElementById("addDriverBtn");
+    var driverForm = document.getElementById("driverForm");
+    var driverTableBody = document.getElementById("driverTableBody");
+    var driverFormContainer = document.getElementById("DriverForm");
+    var cancelFormBtn = document.getElementById("cancelForm");
+    var isEditing = false;
+    var editingRow = null;
+    var drivers = [];
+    // Show the driver form
+    var showDriverForm = function () {
+        driverFormContainer.style.display = "block";
+    };
+    // Hide the driver form
+    var hideDriverForm = function () {
+        driverFormContainer.style.display = "none";
+        driverForm.reset();
+        isEditing = false;
+        editingRow = null;
+    };
+    // Populate the table
+    var populateTable = function () {
+        driverTableBody.innerHTML = "";
+        drivers.forEach(function (driver) {
+            var row = document.createElement("tr");
+            row.innerHTML = "\n        <td>".concat(driver.id, "</td>\n        <td>").concat(driver.name, "</td>\n        <td>").concat(driver.licenseNumber, "</td>\n        <td>").concat(driver.phone, "</td>\n        <td>").concat(driver.email, "</td>\n        <td>").concat(driver.status, "</td>\n        <td>\n          <button class=\"btn btn-warning btn-sm edit-btn\">Edit</button>\n          <button class=\"btn btn-danger btn-sm delete-btn\">Delete</button>\n        </td>\n      ");
+            // Add event listeners for edit and delete
+            var editBtn = row.querySelector(".edit-btn");
+            var deleteBtn = row.querySelector(".delete-btn");
+            editBtn.addEventListener("click", function () { return editDriver(row, driver); });
+            deleteBtn.addEventListener("click", function () { return deleteDriver(row, driver.id); });
+            driverTableBody.appendChild(row);
+        });
+    };
+    // Add or update a driver
+    driverForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var formData = new FormData(driverForm);
+        var driver = {
+            id: formData.get("driverID"),
+            name: formData.get("driverName"),
+            licenseNumber: formData.get("licenseNumber"),
+            phone: formData.get("driverPhone"),
+            email: formData.get("driverEmail"),
+            status: formData.get("driverStatus"),
+        };
+        if (isEditing && editingRow) {
+            // Update existing driver
+            var index = drivers.findIndex(function (d) { return d.id === driver.id; });
+            drivers[index] = driver;
+        }
+        else {
+            // Add new driver
+            drivers.push(driver);
+        }
+        populateTable();
+        hideDriverForm();
+    });
+    // Edit a driver
+    var editDriver = function (row, driver) {
+        isEditing = true;
+        editingRow = row;
+        driverForm["driverID"].value = driver.id;
+        driverForm["driverName"].value = driver.name;
+        driverForm["licenseNumber"].value = driver.licenseNumber;
+        driverForm["driverPhone"].value = driver.phone;
+        driverForm["driverEmail"].value = driver.email;
+        driverForm["driverStatus"].value = driver.status;
+        showDriverForm();
+    };
+    // Delete a driver
+    var deleteDriver = function (row, driverId) {
+        var index = drivers.findIndex(function (driver) { return driver.id === driverId; });
+        if (index !== -1) {
+            drivers.splice(index, 1);
+            row.remove();
+        }
+    };
+    // Event listeners
+    addDriverBtn.addEventListener("click", showDriverForm);
+    cancelFormBtn.addEventListener("click", hideDriverForm);
 });
-// Cancel Button functionality
-var cancelFormBtn = document.getElementById('cancelForm');
-cancelFormBtn.addEventListener('click', function () {
-    resetForm();
-});
-// Form Submit functionality
-var employeeFormElement = document.getElementById('employeeForm');
-employeeFormElement.addEventListener('submit', function (e) {
-    e.preventDefault();
-    // Gather data from the form fields
-    var employeeID = document.getElementById('employeeID').value;
-    var employeeName = document.getElementById('employeeName').value;
-    var employeeRole = document.getElementById('employeeRole').value;
-    var employeePhone = document.getElementById('employeePhone').value;
-    var employeeEmail = document.getElementById('employeeEmail').value;
-    var employeeStatus = document.getElementById('employeeStatus').value;
-    if (isEdit && currentEditRow) {
-        editEmployeeInTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
-    }
-    else {
-        addEmployeeToTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
-    }
-    resetForm();
-});
-// Flag to check if we are editing
-var isEdit = false;
-var currentEditRow = null;
-// Add Employee to Table
-function addEmployeeToTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus) {
-    var newRow = document.createElement('tr');
-    newRow.dataset.employeeId = employeeID;
-    newRow.innerHTML = "\n    <td>".concat(employeeID, "</td>\n    <td>").concat(employeeName, "</td>\n    <td>").concat(employeeRole, "</td>\n    <td>").concat(employeePhone, "</td>\n    <td>").concat(employeeEmail, "</td>\n    <td>").concat(employeeStatus, "</td>\n    <td>\n      <button class=\"btn btn-warning btn-sm\" onclick=\"editEmployee(event)\">Edit</button>\n      <button class=\"btn btn-danger btn-sm\" onclick=\"deleteEmployee(event)\">Delete</button>\n    </td>\n  ");
-    employeeTableBody.appendChild(newRow);
-}
-// Edit Employee functionality
-function editEmployee(event) {
-    var row = event.target.closest('tr');
-    if (!row)
-        return;
-    var cells = row.getElementsByTagName('td');
-    var _a = [
-        cells[0].innerText,
-        cells[1].innerText,
-        cells[2].innerText,
-        cells[3].innerText,
-        cells[4].innerText,
-        cells[5].innerText,
-    ], employeeID = _a[0], employeeName = _a[1], employeeRole = _a[2], employeePhone = _a[3], employeeEmail = _a[4], employeeStatus = _a[5];
-    document.getElementById('employeeID').value = employeeID;
-    document.getElementById('employeeName').value = employeeName;
-    document.getElementById('employeeRole').value = employeeRole;
-    document.getElementById('employeePhone').value = employeePhone;
-    document.getElementById('employeeEmail').value = employeeEmail;
-    document.getElementById('employeeStatus').value = employeeStatus;
-    var formTitle = document.getElementById('formTitle');
-    formTitle.textContent = 'Edit Employee';
-    employeeForm.style.display = 'block';
-    overlay.style.display = 'block';
-    isEdit = true;
-    currentEditRow = row;
-}
-// Edit the employee row in the table
-function editEmployeeInTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus) {
-    if (!currentEditRow)
-        return;
-    var cells = currentEditRow.getElementsByTagName('td');
-    cells[0].innerText = employeeID;
-    cells[1].innerText = employeeName;
-    cells[2].innerText = employeeRole;
-    cells[3].innerText = employeePhone;
-    cells[4].innerText = employeeEmail;
-    cells[5].innerText = employeeStatus;
-}
-// Delete Employee functionality
-function deleteEmployee(event) {
-    var row = event.target.closest('tr');
-    row === null || row === void 0 ? void 0 : row.remove();
-}
-// Reset form and hide it after submission or cancel
-function resetForm() {
-    employeeForm.style.display = 'none';
-    overlay.style.display = 'none';
-    isEdit = false;
-    currentEditRow = null;
-    employeeFormElement.reset();
-}
