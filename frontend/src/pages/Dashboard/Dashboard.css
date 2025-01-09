@@ -3,22 +3,22 @@ body {
   overflow-x: hidden;
 }
 img {
-  width: 40%;
-  margin-bottom: 20px;
+  width: 42%;
+  margin-bottom: 25px;
 }
 #sidebar {
-  background-color: #343a40;
+  background-color: #341a40;
   color: #ffffff;
   min-height: 100vh;
   padding: 20px;
-  width:15%;
+  width:16%;
 }
 
 #sidebar .nav-link {
   color: #ffffff;
   padding: 10px 15px;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 #sidebar .nav-link.active {
@@ -51,13 +51,13 @@ img {
 
 .card-text {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: none;
 }
 
 #graph-section h2 {
   font-size: 1.8rem;
   color: #343a40;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 canvas {
@@ -71,6 +71,6 @@ canvas {
   }
 
   #main-content {
-    padding: 20px;
+    padding: 22px;
   }
 }
