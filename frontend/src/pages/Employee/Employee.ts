@@ -59,15 +59,14 @@ employeeFormElement.addEventListener('submit', (e) => {
     employeeTableBody.appendChild(newRow);
   }
 
-  // Reset and hide the form
+ 
   resetForm();
 });
 
-// Flag to check if we are editing
 let isEdit = false;
 let currentEditRow: HTMLTableRowElement | null = null;
 
-// Edit Employee functionality
+
 function editEmployee(event: MouseEvent) {
   const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
   const cells = row?.getElementsByTagName('td');
@@ -80,7 +79,7 @@ function editEmployee(event: MouseEvent) {
     const employeeEmail = cells[4].innerText;
     const employeeStatus = cells[5].innerText;
 
-    // Fill the form with the current employee data
+   
     (document.getElementById('employeeID') as HTMLInputElement).value = employeeID;
     (document.getElementById('employeeName') as HTMLInputElement).value = employeeName;
     (document.getElementById('employeeRole') as HTMLInputElement).value = employeeRole;
@@ -88,21 +87,21 @@ function editEmployee(event: MouseEvent) {
     (document.getElementById('employeeEmail') as HTMLInputElement).value = employeeEmail;
     (document.getElementById('employeeStatus') as HTMLSelectElement).value = employeeStatus;
 
-    // Change form title to 'Edit Employee'
+   
     const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
     formTitle.textContent = 'Edit Employee';
 
-    // Show the form and overlay
+   
     employeeForm.style.display = 'block';
     overlay.style.display = 'block';
 
-    // Set flag to indicate edit mode
+   
     isEdit = true;
     currentEditRow = row;
   }
 }
 
-// Edit the employee row in the table after submitting the form
+
 function editEmployeeInTable(employeeID: string, employeeName: string, employeeRole: string, employeePhone: string, employeeEmail: string, employeeStatus: string) {
   if (currentEditRow) {
     const cells = currentEditRow.getElementsByTagName('td');
@@ -113,12 +112,12 @@ function editEmployeeInTable(employeeID: string, employeeName: string, employeeR
     cells[4].innerText = employeeEmail;
     cells[5].innerText = employeeStatus;
 
-    // Reset edit flag and current row
+  
     resetForm();
   }
 }
 
-// Delete Employee functionality
+
 function deleteEmployee(event: MouseEvent) {
   const row = (event.target as HTMLElement).closest('tr') as HTMLTableRowElement;
   if (row) {
@@ -126,7 +125,7 @@ function deleteEmployee(event: MouseEvent) {
   }
 }
 
-// Reset form and hide it after submission or cancel
+
 function resetForm() {
   employeeForm.style.display = 'none';
   overlay.style.display = 'none';
