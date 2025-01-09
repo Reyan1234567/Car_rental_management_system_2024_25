@@ -1,4 +1,3 @@
-// Get elements
 const addEmployeeBtn = document.getElementById('addEmployeeBtn') as HTMLButtonElement;
 const employeeForm = document.getElementById('EmployeeForm') as HTMLDivElement;
 const employeeTableBody = document.getElementById('employeeTableBody') as HTMLTableSectionElement;
@@ -6,9 +5,9 @@ const overlay = document.createElement('div');
 overlay.id = 'overlay';
 document.body.appendChild(overlay);
 
-// Add Employee Button functionality
+
 addEmployeeBtn.addEventListener('click', () => {
-  // Clear the form fields for new entry
+
   const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
   formTitle.textContent = 'Add Employee';
   (document.getElementById('employeeForm') as HTMLFormElement).reset();
@@ -16,19 +15,19 @@ addEmployeeBtn.addEventListener('click', () => {
   overlay.style.display = 'block';
 });
 
-// Cancel Button functionality
+
 const cancelFormBtn = document.getElementById('cancelForm') as HTMLButtonElement;
 cancelFormBtn.addEventListener('click', () => {
   employeeForm.style.display = 'none';
   overlay.style.display = 'none';
 });
 
-// Form Submit functionality
+
 const employeeFormElement = document.getElementById('employeeForm') as HTMLFormElement;
 employeeFormElement.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Gather data from the form fields
+
   const employeeID = (document.getElementById('employeeID') as HTMLInputElement).value;
   const employeeName = (document.getElementById('employeeName') as HTMLInputElement).value;
   const employeeRole = (document.getElementById('employeeRole') as HTMLInputElement).value;
@@ -36,11 +35,11 @@ employeeFormElement.addEventListener('submit', (e) => {
   const employeeEmail = (document.getElementById('employeeEmail') as HTMLInputElement).value;
   const employeeStatus = (document.getElementById('employeeStatus') as HTMLSelectElement).value;
 
-  // Check if it's an edit or add operation
+
   if (employeeID && isEdit) {
     editEmployeeInTable(employeeID, employeeName, employeeRole, employeePhone, employeeEmail, employeeStatus);
   } else {
-    // Create a new employee row in the table
+  
     const newRow = document.createElement('tr');
     newRow.dataset.employeeId = employeeID;
 
