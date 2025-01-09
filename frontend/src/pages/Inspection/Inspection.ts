@@ -10,7 +10,7 @@ document.body.appendChild(overlay);
 // Show form for adding inspection
 addInspectionBtn.addEventListener('click', () => {
   const formTitle = document.getElementById('formTitle') as HTMLHeadingElement;
-  formTitle.textContent = 'Add Inspection';
+  formTitle.textContent = 'Add Inspection';// Set the title of the form dynamically
   (document.getElementById('inspectionForm') as HTMLFormElement).reset();
   inspectionForm.style.display = 'block';
   overlay.style.display = 'block';
