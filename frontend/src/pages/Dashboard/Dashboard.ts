@@ -8,7 +8,6 @@ const totalVehicles = document.getElementById("totalVehicles") as HTMLElement;
 const totalInspections = document.getElementById("totalInspections") as HTMLElement;
 const logoutBtn = document.getElementById("logoutBtn") as HTMLElement;
 
-// Fetch data and populate the dashboard
 async function populateDashboard() {
   try {
     totalDrivers.textContent = (await getDriverCount()).toString();
@@ -19,11 +18,9 @@ async function populateDashboard() {
   }
 }
 
-// Handle logout
 logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("authToken");
   window.location.href = "../Login/Login.html";
 });
 
-// Initialize the dashboard
 populateDashboard();
