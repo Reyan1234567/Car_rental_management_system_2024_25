@@ -75,8 +75,15 @@ img {
 
 button {
   border: #d8600e solid 1px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+<<<<<<< HEAD:frontend/src/pages/ADMIN/Driver/Driver.css
 .btn-primary:hover {
   background-color: #343a40;
+=======
+.btn-primary:hover{
+  background-color:#d8600e;
+  border-color: #343a40;
+>>>>>>> 8e326ec7942ea9e7f7bdf0854bdc495ec63a76e3:frontend/src/pages/Driver/Driver.css
 }
