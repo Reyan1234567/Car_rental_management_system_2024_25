@@ -15,7 +15,6 @@ registrationForm.addEventListener('submit', async (event: Event) => {
   const password = passwordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
 
-  // Basic validation
   if (!fullName || !role || !username || !password || !confirmPassword) {
     alert('All fields are required.');
     return;
