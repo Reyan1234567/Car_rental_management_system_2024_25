@@ -1,4 +1,3 @@
-// pages/Dashboard/Dashboard.ts
 
 import { getDriverCount } from '../../services/dashboardService';
 import { getVehicleCount } from '../../services/dashboardService';
