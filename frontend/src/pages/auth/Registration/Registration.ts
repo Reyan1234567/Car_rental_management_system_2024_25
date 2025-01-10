@@ -3,7 +3,6 @@ const registrationForm = document.querySelector('form') as HTMLFormElement;
 registrationForm.addEventListener('submit', async (event: Event) => {
   event.preventDefault(); // Prevent default form submission
 
-  // Retrieve input values
   const fullNameInput = document.querySelector('#fullName') as HTMLInputElement;
   const roleInput = document.querySelector('#role') as HTMLInputElement;
   const usernameInput = document.querySelector('#username') as HTMLInputElement;
