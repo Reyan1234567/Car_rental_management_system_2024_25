@@ -1,4 +1,3 @@
-// Driver.ts
 
 document.addEventListener("DOMContentLoaded", () => {
   const addDriverBtn = document.getElementById("addDriverBtn") as HTMLButtonElement;
@@ -10,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let isEditing = false;
   let editingRow: HTMLTableRowElement | null = null;
 
-  // Driver data model
   interface Driver {
     id: string;
     name: string;
@@ -22,12 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const drivers: Driver[] = [];
 
-  // Show the driver form
   const showDriverForm = () => {
     driverFormContainer.style.display = "block";
   };
 
-  // Hide the driver form
   const hideDriverForm = () => {
     driverFormContainer.style.display = "none";
     driverForm.reset();
@@ -35,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     editingRow = null;
   };
 
-  // Populate the table
   const populateTable = () => {
     driverTableBody.innerHTML = "";
     drivers.forEach((driver) => {
@@ -54,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </td>
       `;
 
-      // Add event listeners for edit and delete
       const editBtn = row.querySelector(".edit-btn") as HTMLButtonElement;
       const deleteBtn = row.querySelector(".delete-btn") as HTMLButtonElement;
 
@@ -65,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Add or update a driver
   driverForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -92,7 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     hideDriverForm();
   });
 
-  // Edit a driver
   const editDriver = (row: HTMLTableRowElement, driver: Driver) => {
     isEditing = true;
     editingRow = row;
@@ -107,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showDriverForm();
   };
 
-  // Delete a driver
   const deleteDriver = (row: HTMLTableRowElement, driverId: string) => {
     const index = drivers.findIndex((driver) => driver.id === driverId);
     if (index !== -1) {
