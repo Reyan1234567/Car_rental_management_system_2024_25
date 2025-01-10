@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class Driver extends Document {
   @Prop({ required: true })
+  _id: string;
+
+  @Prop({ required: true })
   driverID: string;
 
   @Prop({ required: true })

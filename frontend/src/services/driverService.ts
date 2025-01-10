@@ -35,7 +35,7 @@ export const addDriver = async (driver: { name: string; phone: string; licenseNu
 // Update a driver by ID
 export const updateDriver = async (id: string, driver: { name: string; phone: string; licenseNumber: string }): Promise<void> => {
   const response = await fetch(`${API_URL}/drivers/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(driver),
   });

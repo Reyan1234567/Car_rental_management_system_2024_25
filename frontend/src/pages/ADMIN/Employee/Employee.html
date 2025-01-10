@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Management - Car Rental Management System</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../styles/index.css" />
+    <link rel="stylesheet" href="./Employee.css" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <div id="sidebar" class="d-flex flex-column justify-content-between">
+        <div>
+          <img src="../../../assets/Images/Polo.png" alt="Logo" />
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="../Dashboard/Dashboard.html"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Driver/Driver.html">Drivers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Vehicle/Vehicle.html">Vehicles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Price/Price.html">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Employees</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="../Booking/Booking.html"
+                >Bookings</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Inspection/Inspection.html"
+                >Inspections</a
+              >
+            </li>
+          </ul>
+        </div>
+        <a href="../../auth/Login/login.html"
+          ><button class="btn btn-primary">Logout</button></a
+        >
+      </div>
+
+      <div id="main-content">
+        <header class="d-flex justify-content-between align-items-center">
+          <h1>Employee Management</h1>
+          <button id="addEmployeeBtn" class="btn btn-primary">Add Employee</button>
+        </header>
+        <hr />
+
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="employeeTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="EmployeeForm">
+      <form id="employeeForm">
+        <h2 id="formTitle">Add Employee</h2>
+        <div class="mb-3">
+          <label for="employeeID" class="form-label">Employee ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeID"
+            name="employeeID"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="employeeName" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeName"
+            name="employeeName"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="employeeRole" class="form-label">Role</label>
+          <input
+            type="text"
+            class="form-control"
+            id="employeeRole"
+            name="employeeRole"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="employeePhone" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="employeePhone"
+            name="employeePhone"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="employeeEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="employeeEmail"
+            name="employeeEmail"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="employeeStatus" class="form-label">Status</label>
+          <select
+            class="form-control"
+            id="employeeStatus"
+            name="employeeStatus"
+            required
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary" id="cancelForm">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+    <script type="module" src="./Employee.js"></script>
+  </body>
+</html>

@@ -11,14 +11,17 @@ import { VehicleModule } from './vehicle/vehicle.module';
 import { EmployeeModule } from './employee/employee.module';
 import { PriceModule } from './price/price.module';
 import { AuthModule } from './auth/auth.module';
+// import { AuthModule } from './auth/auth.module';
 
 
 @Module({
   imports: [
       MongooseModule.forRoot("mongodb://localhost:27017/Polo", {
-      }), BookingModule, DriverModule, InspectionModule, InventoryModule, TimeboundModule, VehicleModule, EmployeeModule, PriceModule, AuthModule
+      }), BookingModule, DriverModule, InspectionModule, InventoryModule, TimeboundModule, VehicleModule, EmployeeModule, PriceModule, AuthModule 
     ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
+

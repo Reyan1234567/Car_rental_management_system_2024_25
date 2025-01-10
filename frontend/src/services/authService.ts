@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/auth";
+const API_URL = "http://localhost:3333/auth";
 
 export async function login(username: string, password: string): Promise<string> {
   const response = await fetch(`${API_URL}/login`, {
@@ -14,5 +14,5 @@ export async function login(username: string, password: string): Promise<string>
   }
 
   const data = await response.json();
-  return data.token; // Assuming the response includes a JWT token
+  return data.token; 
 }

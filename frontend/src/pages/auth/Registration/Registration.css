@@ -1,0 +1,42 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .btn-primary {
+    background-color: rgb(216, 96, 14);
+    border-color: rgb(216, 96, 14);
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  input::placeholder {
+    font-style: italic;
+    color: #6c757d;
+  }
+  
+  .text-primary {
+    color: rgb(216, 96, 14) !important;
+    text-decoration: none;
+  }
+  
+  .text-primary:hover {
+    text-decoration: underline;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
