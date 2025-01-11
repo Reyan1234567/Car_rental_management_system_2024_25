@@ -3,9 +3,9 @@ body {
   overflow-x: hidden;
 }
 
-.btn-primary{
-  background-color:rgb(216, 96, 14);
-  border:rgb(216, 96, 14) solid 1px;
+.btn-primary {
+  background-color: rgb(216, 96, 14);
+  border: rgb(216, 96, 14) solid 1px;
 }
 img {
   width: 60%;
@@ -16,7 +16,7 @@ img {
   color: #ffffff;
   min-height: 100vh;
   padding: 20px;
-  width:17%;
+  width: 17%;
 }
 .btn {
   padding: 10px 15px;
