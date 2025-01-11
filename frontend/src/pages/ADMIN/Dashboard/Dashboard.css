@@ -7,28 +7,19 @@ body {
   border: #d8600e solid 1px;
 }
 img {
-<<<<<<< HEAD:frontend/src/pages/ADMIN/Dashboard/Dashboard.css
-  width: 60%;
-  margin-bottom: 20px;
-=======
   width: 42%;
   margin-bottom: 25px;
->>>>>>> 8e326ec7942ea9e7f7bdf0854bdc495ec63a76e3:frontend/src/pages/Dashboard/Dashboard.css
 }
 #sidebar {
-  background-color: #341a40;
+  background-color: #343a40;
   color: #ffffff;
   min-height: 100vh;
   padding: 20px;
-<<<<<<< HEAD:frontend/src/pages/ADMIN/Dashboard/Dashboard.css
   width:17%;
 }
 .btn {
   padding: 10px 15px;
   cursor: pointer;
-=======
-  width:16%;
->>>>>>> 8e326ec7942ea9e7f7bdf0854bdc495ec63a76e3:frontend/src/pages/Dashboard/Dashboard.css
 }
 #sidebar .nav-link {
   color: #ffffff;

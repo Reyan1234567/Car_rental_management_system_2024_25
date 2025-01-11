@@ -71,10 +71,10 @@ loginForm.addEventListener('submit', function (event) { return __awaiter(_this, 
                 data = _a.sent();
                 localStorage.setItem('token', data.token);
                 if(role==="user"){
-                    window.location.assign('http://127.0.0.1:5501/Car_rental_management_system_2024_25/frontend/src/pages/USER/Dashboard/Dashboard.html');
+                    window.location.assign('http://127.0.0.1:5500/frontend/src/pages/USER/Dashboard/Dashboard.html');
                 }
                 else if(role==="admin"){
-                    window.location.assign('http://127.0.0.1:5501/Car_rental_management_system_2024_25/frontend/src/pages/ADMIN/Dashboard/Dashboard.html');
+                    window.location.assign('http://127.0.0.1:5500/frontend/src/pages/ADMIN/Dashboard/Dashboard.html');
                 }
                 return [3 /*break*/, 6];
             case 4: return [4 /*yield*/, response.json()];
