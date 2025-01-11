@@ -35,7 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
+// Select the registration form element
 var registrationForm = document.querySelector('form');
+// Add an event listener to handle form submission
 registrationForm.addEventListener('submit', function (event) { return __awaiter(_this, void 0, void 0, function () {
     var fullNameInput, roleInput, usernameInput, passwordInput, confirmPasswordInput, fullName, role, username, password, confirmPassword, response, error, err_1;
     return __generator(this, function (_a) {
