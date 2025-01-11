@@ -1,9 +1,8 @@
 const registrationForm = document.querySelector('form') as HTMLFormElement;
 
 registrationForm.addEventListener('submit', async (event: Event) => {
-  event.preventDefault(); // Prevent default form submission
+  event.preventDefault(); 
 
-  // Retrieve input values
   const fullNameInput = document.querySelector('#fullName') as HTMLInputElement;
   const roleInput = document.querySelector('#role') as HTMLInputElement;
   const usernameInput = document.querySelector('#username') as HTMLInputElement;
@@ -16,7 +15,6 @@ registrationForm.addEventListener('submit', async (event: Event) => {
   const password = passwordInput.value.trim();
   const confirmPassword = confirmPasswordInput.value.trim();
 
-  // Basic validation
   if (!fullName || !role || !username || !password || !confirmPassword) {
     alert('All fields are required.');
     return;
