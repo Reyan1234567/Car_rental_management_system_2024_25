@@ -92,3 +92,4 @@ registrationForm.addEventListener('submit', function (event) { return __awaiter(
         }
     });
 }); });
+
