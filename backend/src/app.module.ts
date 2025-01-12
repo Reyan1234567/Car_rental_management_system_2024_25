@@ -11,7 +11,6 @@ import { VehicleModule } from './vehicle/vehicle.module';
 import { EmployeeModule } from './employee/employee.module';
 import { PriceModule } from './price/price.module';
 import { AuthModule } from './auth/auth.module';
-// import { AuthModule } from './auth/auth.module';
 
 
 @Module({
