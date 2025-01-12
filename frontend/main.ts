@@ -19,5 +19,5 @@ const renderApp = () => {
   `;
 };
 
-// Initialize the app
+
 renderApp();
