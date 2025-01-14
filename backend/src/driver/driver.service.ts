@@ -7,7 +7,7 @@ import { Driver } from './driver.schema';
 export class DriverService {
   constructor(@InjectModel(Driver.name) private driverModel: Model<Driver>) {}
 
-   */
+
 
   async findAll(): Promise<Driver[]> {
     return this.driverModel.find().exec();
