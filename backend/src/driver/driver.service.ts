@@ -6,8 +6,7 @@ import { Driver } from './driver.schema';
 @Injectable()
 export class DriverService {
   constructor(@InjectModel(Driver.name) private driverModel: Model<Driver>) {}
- 
-   * @returns Promise containing an array of Driver documents
+
    */
 
   async findAll(): Promise<Driver[]> {
